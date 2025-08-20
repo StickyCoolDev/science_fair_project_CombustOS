@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CombustOS and CombustBoard, a small OS with a small board." />
+    <meta name="keywords" content="Arduino, OS, C++, Board, Hardware, Operating System, Development" />
+    <meta name="author" content="Hujifa Hanif Shainik, StickyCoolDev, Abdur Noor" />
+    <title>CombustOS & CombustBoard</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <link rel="manifest" href="site.webmanifest">
+    
+    <style>
+        :root {
+            --primary-color: #ff8800;
+            --secondary-color: #333;
+            --background-color: #f0f0f0;
+            --white: #fff;
+            --dark-gray: #1a1a1a;
+            --light-gray: #ccc;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 10vh;
+        }
+        
+        main {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+        
+        .header {
+            position: relative;
+            min-height: 250px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .header-bg {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .header-logo {
+            max-width: 70%;
+            height: auto;
+            display: block;
+        }
+        
+        .header-title {
+            color: var(--white);
+            margin-top: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        /* Language Switcher Styles */
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+        }
+        
+        .language-switcher select {
+            padding: 5px 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 0.75rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+            font-size: 0.8rem;
+        }
+        
+        /* utilities*/
+        .center-text {
+            text-align: center;
+        }
+        
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .icon-container .fa-solid,
+        .icon-container .fa-brands {
+            font-size: 4rem;
+            /* Adjust icon size as needed */
+            color: var(--primary-color);
+            /* You can change the color of the icons here */
+        }
+    </style>
+</head>
+
+<body>
+    <div x-data="{
+        currentLang: 'en',
+        translations: {
+            en: {
+                headerText: 'A science fair project about an OS and Computer for the Arduino Nano',
+                footerTitle: 'CombustOS & CombustBoard',
+                footerSubtitle: 'A small OS for a small board.',
+                copyright: 'Hujifa Hanif Shainik. All Rights Reserved.',
+                reasonQ: 'Why',
+                reasonA: 'just for fun and learning about low level programming!',
+                whatis: 'What Is this',
+                whatisA: 'This is a small and minimal operating system and computer built with c++ and made for the Arduino Nano microcontroller board',
+                codeQ: 'Code and More Info',
+                codeA: 'The code for this project is open-source and available on GitHub. Feel free to explore the repository to see how everything was built!',
+                teamQ: 'Team Members',
+                teamM1: 'Hjuifa Hanif Shainik',
+                teamM2: 'Abdur noor',
+                teamM3: 'placeholder'
+            },
+            bn: {
+                headerText: 'একটি সাইন্সের প্রজেক্ট অপারেটিং সিস্টেম ও একটি ছোট কম্পিউটার নিয়ে যা তৈরি arduino nano এর মাধ্যমে',
+                footerTitle: 'CombustOS এবং CombustBoard',
+                footerSubtitle: 'একটি ছোট অপারেটিং সিস্টেম একটি ছোট বোর্ডের জন্য',
+                copyright: 'হুজাইফা হানিফ সৈনিক, সর্বস্বত্ব সংরক্ষিত',
+                reasonQ: 'কেন',
+                reasonA: 'শুধু মজার জন্য এবং লো-লেভেল প্রোগ্রামিং সম্পর্কে জানার জন্য!',
+                whatis: 'কী',
+                whatisA: 'এটি একটি ছোট এবং ন্যূনতম অপারেটিং সিস্টেম এবং কম্পিউটার যা C++ দ্বারা তৈরি এবং তৈরি করা হয়েছে Arduino Nano মাইক্রোকন্ট্রোটলার বোর্ড এর জন্য',
+                codeQ: 'কোড এবং আরও তথ্য',
+                codeA: 'এই প্রকল্পের কোড ওপেন-সোর্স এবং গিটহাবে উপলব্ধ। সবকিছু কীভাবে তৈরি হয়েছিল তা দেখতে নির্দ্বিধায় সংগ্রহস্থলটি অন্বেষণ করুন!',
+                teamQ: 'দলের সদস্য',
+                teamM1: 'হুজাইফা হানিফ সৈনিক',
+                teamM2: 'আব্দুর নূর',
+                teamM3: 'placeholder'
+            }
+        },
+        setLang(lang) {
+            this.currentLang = lang;
+        }
+    }">
+        <header class="header">
+            <img src="background.png" alt="A background image featuring an orange wavy pattern." class="header-bg" />
+            <div class="header-content">
+                <img src="CombustOS_Logo.png" alt="CombustOS Logo: A cartoon-like fire character with a board and code on top." class="header-logo" />
+                <p x-text="translations[currentLang].headerText"></p>
+            </div>
+            <div class="language-switcher">
+                <select @change="setLang($event.target.value)">
+                    <option value="en">English</option>
+                    <option value="bn">Banlga</option>
+                </select>
+            </div>
+        </header>
+        
+        <main>
+            <div>
+                <div class="icon-container">
+                    <i class="fa-solid fa-question"></i>
+                </div>
+                <h1 x-text="translations[currentLang].reasonQ" class="center-text"></h1>
+                <p class="center-text" x-text="translations[currentLang].reasonA"></p>
+            </div>
+            <hr />
+            <div>
+                <div class="icon-container">
+                    <i class="fa-solid fa-info"></i>
+                </div>
+                <h1 x-text="translations[currentLang].whatis" class="center-text"></h1>
+                <p class="center-text" x-text="translations[currentLang].whatisA"></p>
+            </div>
+            <hr />
+            <div>
+                <div class="icon-container">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h1 x-text="translations[currentLang].codeQ" class="center-text"></h1>
+                <p class="center-text" x-text="translations[currentLang].codeA"></p>
+                <div class="center-text">
+                    <a href="https://github.com/StickyCoolDev/CombustOS.git" target="_blank" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
+                        <i class="fab fa-github"></i>
+                        GitHub Repository
+                    </a>
+                </div>
+            </div>
+            <hr />
+            <div>
+                <div class="icon-container">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h1 x-text="translations[currentLang].teamQ" class="center-text"></h1>
+                <ul>
+                    <li x-text="translations[currentLang].teamM1"></li>
+                    <li x-text="translations[currentLang].teamM2"></li>
+                    <li x-text="translations[currentLang].teamM3"></li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p><strong x-text="translations[currentLang].footerTitle"></strong></p>
+            <p x-text="translations[currentLang].footerSubtitle"></p>
+            <div class="social-links">
+                <a href="https://github.com/StickyCoolDev" target="_self" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+                <a href="https://stickycooldev.w3spaces.com" target="_self" aria-label="Portfolio"><i class="fa-solid fa-earth-americas"></i></a>
+            </div>
+            
+            <div class="copyright">
+                <p x-text="translations[currentLang].copyright"></p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
