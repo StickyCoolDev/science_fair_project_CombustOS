@@ -153,14 +153,23 @@
         .icon-container .fa-solid,
         .icon-container .fa-brands {
             font-size: 4rem;
-            /* Adjust icon size as needed */
             color: var(--primary-color);
-            /* You can change the color of the icons here */
+        }
+
+        ul{
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          text-align: center;
+          font-size: 1.5rem;
+          flex-direction: column;
+          list-style-type: none;
         }
     </style>
 </head>
 
 <body>
+
     <div x-data="{
         currentLang: 'en',
         translations: {
